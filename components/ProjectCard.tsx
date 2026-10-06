@@ -1,36 +1,22 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ProjectFrontmatter } from "@/lib/mdx";
 import { Tag } from "@/components/Tag";
 
 export function ProjectCard({ project }: { project: ProjectFrontmatter }) {
   return (
-    <article className="flex h-full flex-col rounded-3xl border border-white/70 bg-white/90 p-6 shadow-panel">
-      <div className="mb-4 flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm uppercase tracking-[0.2em] text-slate">{project.date}</p>
-          <h3 className="mt-2 font-serif text-2xl text-ink">{project.title}</h3>
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white/80 transition hover:-translate-y-1 hover:shadow-panel">
+      <Link href={`/projects/${project.slug}`} className="relative block aspect-[1.65] overflow-hidden bg-paper" aria-label={`Read about ${project.title}`}>
+        {project.image ? <Image src={project.image} alt="" fill sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw" className="object-cover transition duration-500 group-hover:scale-[1.03]" /> : <div className="grid h-full place-items-center font-serif text-4xl text-muted">{project.title}</div>}
+      </Link>
+      <div className="flex flex-1 flex-col p-5">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <p className="text-[10px] font-bold uppercase tracking-[.14em] text-muted">{project.date}</p>
+          <span className="text-[10px] font-semibold text-accent">{project.status}</span>
         </div>
-        <Tag>{project.status}</Tag>
-      </div>
-      <p className="text-sm leading-7 text-slate">{project.description}</p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {project.tags?.map((tag) => (
-          <Tag key={tag}>{tag}</Tag>
-        ))}
-      </div>
-      <div className="mt-6 pt-2">
-        <Link className="font-medium text-accent underline-offset-4 hover:underline" href={`/projects/${project.slug}`}>
-          View project
-        </Link>
-        {project.links?.[0] ? (
-          <Link
-            className="ml-4 font-medium text-accent underline-offset-4 hover:underline"
-            href={project.links[0].href}
-            target={project.links[0].href.startsWith("/") ? undefined : "_blank"}
-          >
-            {project.links[0].label}
-          </Link>
-        ) : null}
+        <h3 className="font-serif text-2xl tracking-tight text-ink"><Link href={`/projects/${project.slug}`} className="hover:text-accent">{project.title}</Link></h3>
+        <p className="mt-3 flex-1 text-sm leading-6 text-slate">{project.description}</p>
+        <div className="mt-4 flex flex-wrap gap-2">{project.tags?.slice(0, 2).map((tag) => <Tag key={tag}>{tag}</Tag>)}</div>
       </div>
     </article>
   );

@@ -29,6 +29,9 @@ const githubPages = getGitHubPagesConfig();
 const nextConfig = {
   assetPrefix: githubPages.assetPrefix,
   basePath: githubPages.basePath,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: githubPages.basePath
+  },
   output: "export",
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   outputFileTracingRoot: path.join(process.cwd()),

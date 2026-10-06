@@ -29,11 +29,10 @@ export default function ResearchPage() {
   return (
     <div className="space-y-8">
       <section className="rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-panel">
-        <p className="text-sm uppercase tracking-[0.28em] text-accent">Research</p>
-        <h1 className="mt-4 font-serif text-4xl text-ink">Themes and directions</h1>
+        <p className="eyebrow">Research</p>
+        <h1 className="mt-4 font-serif text-4xl text-ink">Computing in context, designed around people.</h1>
         <p className="mt-6 max-w-3xl leading-8 text-slate">
-          Organize your research narrative by topic instead of chronology. This makes it easier for faculty, recruiters, and
-          collaborators to understand your agenda at a glance.
+          I build and study interactive systems that connect sensing, interfaces, and AI to everyday environments. Across projects, a common question guides me: how can technology become useful, understandable, and responsive in the moment it is needed?
         </p>
       </section>
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">

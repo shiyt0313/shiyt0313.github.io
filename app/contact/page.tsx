@@ -17,10 +17,10 @@ export default function ContactPage() {
   return (
     <div className="space-y-8">
       <section className="rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-panel">
-        <p className="text-sm uppercase tracking-[0.28em] text-accent">Contact</p>
-        <h1 className="mt-4 font-serif text-4xl text-ink">Professional links and contact info</h1>
+        <p className="eyebrow">Contact</p>
+        <h1 className="mt-4 font-serif text-4xl text-ink">Let’s start a conversation.</h1>
         <p className="mt-6 max-w-3xl leading-8 text-slate">
-          This page is static by design. No database, no secret keys, and no contact backend are required.
+          I’m happy to hear from researchers, collaborators, and anyone interested in ubiquitous computing and human-AI systems.
         </p>
       </section>
       <div className="grid gap-6 md:grid-cols-2">

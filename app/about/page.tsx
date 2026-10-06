@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getAssetPath } from "@/lib/assets";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = {
@@ -13,13 +14,13 @@ export default function AboutPage() {
           alt="Yingtian Shi"
           className="h-36 w-36 rounded-full object-cover"
           height={144}
-          src="/images/profile.png"
+          src={getAssetPath("/images/profile.png")}
           width={144}
         />
-        <p className="text-sm uppercase tracking-[0.28em] text-accent">About</p>
-        <h1 className="mt-4 font-serif text-4xl text-ink">Academic profile</h1>
+        <p className="eyebrow">About</p>
+        <h1 className="mt-4 font-serif text-4xl text-ink">Research grounded in real life.</h1>
         <p className="mt-6 leading-8 text-slate">
-          My name is Yingtian Shi. I am currently a second-year PhD student in Computer Science at Georgia Tech, advised by
+            I’m Yingtian Shi, a PhD student in Computer Science at Georgia Tech, advised by
           {` ${siteConfig.advisor}`}. My research interests lie in ubiquitous computing and AI, specifically in Human-AI
           co-evolution.
         </p>
@@ -29,8 +30,7 @@ export default function AboutPage() {
         <div className="rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-panel">
           <h2 className="font-serif text-2xl text-ink">Education</h2>
           <p className="mt-4 leading-8 text-slate">
-            PhD student in Computer Science at Georgia Tech. This section can be extended with prior degrees and milestones
-            as your academic record evolves.
+            I study how intelligent systems can sense context and collaborate with people across wearables, smart homes, and interactive tools.
           </p>
         </div>
         <div className="rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-panel">
@@ -44,8 +44,7 @@ export default function AboutPage() {
         <div className="rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-panel">
           <h2 className="font-serif text-2xl text-ink">Advisor and Lab</h2>
           <p className="mt-4 leading-8 text-slate">
-            Advised by Dr. Thomas Ploetz at Georgia Tech. This page is intentionally static so lab details, collaborators,
-            and affiliations can be updated without changing the content system.
+            My work spans ubiquitous computing, multimodal interaction, and human-AI collaboration, with an emphasis on systems that work beyond the lab.
           </p>
         </div>
         <div className="rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-panel">

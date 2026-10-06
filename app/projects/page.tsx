@@ -11,11 +11,10 @@ export default function ProjectsPage() {
   return (
     <div className="space-y-8">
       <section className="rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-panel">
-        <p className="text-sm uppercase tracking-[0.28em] text-accent">Projects</p>
-        <h1 className="mt-4 font-serif text-4xl text-ink">MDX-managed project archive</h1>
+        <p className="eyebrow">Projects</p>
+        <h1 className="mt-4 font-serif text-4xl text-ink">Research through working systems.</h1>
         <p className="mt-6 max-w-3xl leading-8 text-slate">
-          Each project lives in `content/projects/*.mdx` with frontmatter for title, slug, date, status, tags, description,
-          image, and links.
+          From wearable sensing and gaze interaction to smart-home intelligence and AI-assisted programming, these projects explore how computation can fit naturally into daily life.
         </p>
       </section>
       <div className="grid gap-6 lg:grid-cols-2">

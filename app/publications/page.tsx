@@ -11,10 +11,10 @@ export default function PublicationsPage() {
   return (
     <div className="space-y-8">
       <section className="rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-panel">
-        <p className="text-sm uppercase tracking-[0.28em] text-accent">Publications</p>
-        <h1 className="mt-4 font-serif text-4xl text-ink">Local metadata-driven publication list</h1>
+        <p className="eyebrow">Publications</p>
+        <h1 className="mt-4 font-serif text-4xl text-ink">Papers and scholarly work.</h1>
         <p className="mt-6 max-w-3xl leading-8 text-slate">
-          Publications are managed in a local TypeScript file and rendered in descending year order without a database.
+          A selection of research on ubiquitous computing, wearable interfaces, smart environments, and human-AI interaction.
         </p>
       </section>
       <div className="space-y-5">

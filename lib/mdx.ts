@@ -4,6 +4,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
+import { getAssetPath } from "@/lib/assets";
 import { getMDXComponents } from "@/mdx-components";
 
 type BaseFrontmatter = {
@@ -54,11 +55,22 @@ function sortByDate<T extends BaseFrontmatter>(items: T[]) {
   return [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
+function normalizeFrontmatterAssets<T extends BaseFrontmatter>(frontmatter: T) {
+  if ("image" in frontmatter && typeof frontmatter.image === "string") {
+    return {
+      ...frontmatter,
+      image: getAssetPath(frontmatter.image)
+    };
+  }
+
+  return frontmatter;
+}
+
 function getFrontmatterList<T extends BaseFrontmatter>(kind: ContentKind) {
   const entries = getSlugs(kind).map((slug) => {
     const file = readMdxFile(kind, slug);
     const { data } = matter(file);
-    return data as T;
+    return normalizeFrontmatterAssets(data as T);
   });
 
   return sortByDate(entries);
@@ -79,7 +91,7 @@ async function getEntry<T extends BaseFrontmatter>(kind: ContentKind, slug: stri
   });
 
   return {
-    frontmatter,
+    frontmatter: normalizeFrontmatterAssets(frontmatter),
     content
   };
 }
