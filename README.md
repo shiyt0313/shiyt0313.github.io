@@ -96,7 +96,7 @@ The publications page sorts entries by year descending automatically.
 
 ## Deployment to GitHub Pages
 
-This repository publishes to `https://shiyt0313.github.io/`. GitHub Pages is set to use GitHub Actions, and `.github/workflows/deploy.yml` builds and deploys the static export whenever `main` is pushed.
+This repository publishes to `https://shiyt0313.github.io/`. While the site is under development, `.github/workflows/deploy.yml` publishes the standalone page in `maintenance/index.html` whenever `main` is pushed. The Next.js source remains available for local development, and later pushes will continue to show the placeholder until the workflow is changed back.
 
 To publish an update from this checkout:
 
@@ -106,7 +106,9 @@ git commit -m "Update website"
 git push origin main
 ```
 
-Wait for the `Deploy Next.js site to Pages` workflow to finish in GitHub Actions.
+Wait for the `Deploy placeholder to Pages` workflow to finish in GitHub Actions.
+
+To publish the full website later, update the workflow to run `npm ci` and `npm run build`, then upload the generated `out/` directory instead of the placeholder.
 
 Notes:
 
