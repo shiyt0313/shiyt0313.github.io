@@ -63,7 +63,7 @@ The file automatically appears on `/blog` and gets a detail page at `/blog/post-
 
 ### Add or edit publications
 
-Edit [`data/publications.ts`](/Users/shiyingtian/Desktop/MyWebsite/MyWebsite/data/publications.ts) and add a new object with:
+Edit [`data/publications.ts`](data/publications.ts) and add a new object with:
 
 - `title`
 - `authors`
@@ -96,35 +96,27 @@ The publications page sorts entries by year descending automatically.
 
 ## Deployment to GitHub Pages
 
-This project is configured for static export with `output: "export"` and supports repository-path deployment such as `https://shiyt0313.github.io/MyWebsite/`.
+This repository publishes to `https://shiyt0313.github.io/`. GitHub Pages is set to use GitHub Actions, and `.github/workflows/deploy.yml` builds and deploys the static export whenever `main` is pushed.
 
-1. Push the `MyWebsite` directory to the `main` branch of your GitHub repository.
-2. In GitHub, open `Settings -> Pages`.
-3. Set `Source` to `GitHub Actions`.
-4. Commit the workflow in `.github/workflows/deploy.yml`.
-5. Push to `main` and wait for the `Deploy Next.js site to Pages` workflow to finish.
-6. Your site will publish to the repository Pages URL automatically.
+To publish an update from this checkout:
+
+```bash
+git add -A
+git commit -m "Update website"
+git push origin main
+```
+
+Wait for the `Deploy Next.js site to Pages` workflow to finish in GitHub Actions.
 
 Notes:
 
-- For repository Pages, the base path is inferred from `GITHUB_REPOSITORY`.
+- The base path is inferred from `GITHUB_REPOSITORY`; this user-site repository builds at `/`.
 - For a custom domain or manual URL override, set `NEXT_PUBLIC_SITE_URL`.
 - The static export output is written to `out/`.
 
-## GitHub Workflow
-
-```bash
-git init
-git add .
-git commit -m "Initialize academic portfolio"
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
-```
-
 ## Update Personal Info
 
-Edit [`lib/site.ts`](/Users/shiyingtian/Desktop/MyWebsite/MyWebsite/lib/site.ts) to update:
+Edit [`lib/site.ts`](lib/site.ts) to update:
 
 - name
 - site title
