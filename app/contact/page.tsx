@@ -10,6 +10,7 @@ const contacts = [
   { label: "Alternative Email", href: `mailto:${siteConfig.alternateEmail}`, value: siteConfig.alternateEmail },
   { label: "GitHub", href: siteConfig.github, value: siteConfig.github },
   { label: "Google Scholar", href: siteConfig.scholar, value: siteConfig.scholar },
+  { label: "ORCID", href: siteConfig.orcid, value: siteConfig.orcid },
   { label: "LinkedIn", href: siteConfig.linkedin, value: siteConfig.linkedin }
 ];
 

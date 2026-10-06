@@ -20,9 +20,8 @@ export default function AboutPage() {
         <p className="eyebrow">About</p>
         <h1 className="mt-4 font-serif text-4xl text-ink">Research grounded in real life.</h1>
         <p className="mt-6 leading-8 text-slate">
-            I’m Yingtian Shi, a PhD student in Computer Science at Georgia Tech, advised by
-          {` ${siteConfig.advisor}`}. My research interests lie in ubiquitous computing and AI, specifically in Human-AI
-          co-evolution.
+            I’m Yingtian Shi, a PhD student in Computer Science at Georgia Tech, advised by{" "}
+          <a className="advisor-link" href={siteConfig.advisorUrl} target="_blank" rel="noopener noreferrer"><strong>{siteConfig.advisor}</strong></a>. My research interests lie in ubiquitous computing and AI, specifically in Human–AI Co-evolution.
         </p>
       </section>
 

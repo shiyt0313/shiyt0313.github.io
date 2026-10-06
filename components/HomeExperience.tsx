@@ -1,122 +1,62 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import type { MouseEvent } from "react";
-import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { SideDeck } from "@/components/SideDeck";
+import { NewsTimeline } from "@/components/NewsTimeline";
+import type { NewsItem } from "@/data/news";
 import { ProjectFrontmatter } from "@/lib/mdx";
-import { Publication } from "@/data/publications";
 import { getAssetPath } from "@/lib/assets";
 import { siteConfig } from "@/lib/site";
+import { useTheme } from "@/components/ThemeProvider";
 
 const links = [
-  { label: "Email", href: `mailto:${siteConfig.email}` },
-  { label: "Google Scholar", href: siteConfig.scholar },
-  { label: "GitHub", href: siteConfig.github },
-  { label: "LinkedIn", href: siteConfig.linkedin }
+  { label: "Email", href: `mailto:${siteConfig.email}`, icon: "email" },
+  { label: "Google Scholar", href: siteConfig.scholar, icon: "scholar" },
+  { label: "LinkedIn", href: siteConfig.linkedin, icon: "linkedin" },
+  { label: "GitHub", href: siteConfig.github, icon: "github" },
+  { label: "ORCID", href: siteConfig.orcid, icon: "orcid" }
 ];
 
-type ThemeMode = "day" | "night";
-
-export function HomeExperience({ projects, publications }: { projects: ProjectFrontmatter[]; publications: Publication[] }) {
-  const [mode, setMode] = useState<ThemeMode>("day");
-  const [backgroundReveal, setBackgroundReveal] = useState<{ key: number; finished: boolean } | null>(null);
-  const [switchTarget, setSwitchTarget] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    setSwitchTarget(document.getElementById("site-side-switch"));
-    document.body.dataset.siteMode = "day";
-    return () => {
-      delete document.body.dataset.siteMode;
-      document.body.removeAttribute("data-theme-reveal-active");
-      document.body.style.removeProperty("background-color");
-      document.body.style.removeProperty("transition");
-    };
-  }, []);
-
-  function changeMode(event: MouseEvent<HTMLButtonElement>, next: ThemeMode) {
-    if (next === mode || (backgroundReveal && !backgroundReveal.finished)) return;
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const x = bounds.left + bounds.width / 2;
-    const y = bounds.top + bounds.height / 2;
-    const body = document.body;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      body.dataset.siteMode = next;
-      setBackgroundReveal(null);
-      setMode(next);
-      return;
-    }
-    document.documentElement.style.setProperty("--theme-origin-x", `${x}px`);
-    document.documentElement.style.setProperty("--theme-origin-y", `${y}px`);
-    const radius = Math.ceil(Math.max(
-      Math.hypot(x, y),
-      Math.hypot(window.innerWidth - x, y),
-      Math.hypot(x, window.innerHeight - y),
-      Math.hypot(window.innerWidth - x, window.innerHeight - y)
-    )) + 2;
-    document.documentElement.style.setProperty("--theme-reveal-radius", `${radius}px`);
-    document.documentElement.style.setProperty("--theme-old-background", getComputedStyle(body).backgroundColor);
-    body.dataset.themeRevealActive = "true";
-    body.dataset.siteMode = next;
-    setBackgroundReveal({ key: Date.now(), finished: false });
-    setMode(next);
-  }
-
-  function finishBackgroundReveal() {
-    const body = document.body;
-    body.style.transition = "none";
-    body.style.backgroundColor = getComputedStyle(body).getPropertyValue("--paper").trim();
-    body.removeAttribute("data-theme-reveal-active");
-    setBackgroundReveal((current) => current ? { ...current, finished: true } : current);
-    requestAnimationFrame(() => {
-      body.style.removeProperty("background-color");
-      body.style.removeProperty("transition");
-    });
-  }
+export function HomeExperience({ projects, news }: { projects: ProjectFrontmatter[]; news: NewsItem[] }) {
+  const { mode } = useTheme();
 
   return (
     <div className="home-stack" data-mode={mode}>
-      {backgroundReveal ? <span key={backgroundReveal.key} className="theme-background-reveal" aria-hidden="true" onAnimationEnd={finishBackgroundReveal} /> : null}
-      {switchTarget ? createPortal(
-        <div className="record-controls" role="group" aria-label="Display mode">
-          <button className={`record-tab ${mode === "day" ? "record-tab-active" : ""}`} onClick={(event) => changeMode(event, "day")} type="button" aria-pressed={mode === "day"}>
-            <span className="record-tab-dot" aria-hidden="true">☀</span> Day
-          </button>
-          <button className={`record-tab ${mode === "night" ? "record-tab-active" : ""}`} onClick={(event) => changeMode(event, "night")} type="button" aria-pressed={mode === "night"}>
-            <span className="record-tab-dot" aria-hidden="true">☾</span> Night
-          </button>
-        </div>,
-        switchTarget
-      ) : null}
       <section className="intro-zone" id="about">
         <div className="home-titlebar">
-          <p className="eyebrow"><span className="eyebrow-dot" /> Ubiquitous Computing · Human-AI Collaboration</p>
-          <h1 className="home-wordmark">Computing in context, designed around people<span>.</span></h1>
+          <p className="eyebrow"><span className="eyebrow-dot" /> Human–AI Co-evolution · Ubiquitous Computing · Multimodal Sensing</p>
+          <h1 className="home-wordmark">
+            <span className="home-wordmark-line"><strong>Understanding Human Dynamics.</strong></span>
+            <span className="home-wordmark-line"><strong>Shaping Adaptive AI system</strong></span>
+          </h1>
         </div>
 
-        <div key={mode} className={`intro-band intro-flip ${mode === "night" ? "intro-flip-night" : "intro-flip-day"}`}>
+        <div className="intro-band">
           <div className="intro-copy">
-            <p className="intro-role">Researcher · Builder · Explorer</p>
-            <p className="intro-bio">Hi, I’m Yingtian. I’m a PhD student in Computer Science at Georgia Tech, advised by {siteConfig.advisor}. I work at the intersection of ubiquitous computing and AI—making technology more perceptive, more collaborative, and more at home in everyday life.</p>
-            <p className="intro-bio intro-bio-secondary">My work moves between research and making: from wearable sensing and smart environments to interactive systems that help people work with AI.</p>
+            <p className="intro-bio">Hi I&apos;m Yingtian. I am a Third year Ph.D. student at Georgia Tech, advised by <a className="advisor-link" href={siteConfig.advisorUrl} target="_blank" rel="noopener noreferrer"><strong>{siteConfig.advisor}</strong></a>. My research connects <strong>time-series learning</strong>, <strong>multimodal sensing</strong> and <strong>AI agents</strong> to understand human dynamics and build AI that evolves with us. My long-term goal is to enable <strong>Human–AI Co-evolution</strong>, where AI learns from people’s changing contexts, needs, and feedback while helping them achieve their goals.</p>
             <div className="intro-links" aria-label="Find me online">
-              {links.map((link) => <Link key={link.label} href={link.href} target={link.href.startsWith("mailto:") ? undefined : "_blank"}>{link.label}<span>↗</span></Link>)}
+              {links.map((link) => <Link key={link.label} href={link.href} aria-label={link.label} title={link.label} target={link.href.startsWith("mailto:") ? undefined : "_blank"} rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}><Image src={getAssetPath(`/icons/${link.icon}.svg`)} alt="" width={22} height={22} className="social-icon" /></Link>)}
             </div>
           </div>
+        </div>
+        <div className="intro-portrait-column">
           <div className="intro-portrait-wrap">
-            <Link href="/about" className="intro-portrait-link" aria-label="About Yingtian Shi">
+            <Link href="/contact" className="intro-portrait-link" aria-label="Contact Yingtian Shi">
               <span className="portrait-orbit portrait-orbit-mid" aria-hidden="true" />
               <span className="portrait-orbit portrait-orbit-far" aria-hidden="true" />
-              <Image src={getAssetPath("/images/profile.png")} alt="Yingtian Shi" width={320} height={320} priority className="intro-portrait" />
-              <span className="portrait-link-cue" aria-hidden="true">About me ↗</span>
+              <span className={`intro-photo-flip ${mode === "night" ? "intro-photo-flip-night" : ""}`}>
+                <span className="intro-photo-face intro-photo-front"><Image src={getAssetPath("/images/profile.png")} alt="Yingtian Shi" width={320} height={320} priority className="intro-portrait" /></span>
+                <span className="intro-photo-face intro-photo-back"><Image src={getAssetPath("/images/profile2.JPG")} alt="Yingtian Shi" width={320} height={320} priority className="intro-portrait" /></span>
+              </span>
+              <span className="portrait-link-cue" aria-hidden="true">Contact me ↗</span>
             </Link>
           </div>
         </div>
       </section>
 
-      <SideDeck projects={projects} publications={publications} />
+      <NewsTimeline items={news} limit={4} />
+      <SideDeck projects={projects} />
     </div>
   );
 }

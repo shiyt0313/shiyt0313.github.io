@@ -22,6 +22,19 @@ Open `http://localhost:3000`.
 
 ## Content Management
 
+### Update News
+
+Edit [`content/news.json`](content/news.json). Each entry has a month (`YYYY-MM`), a `category`, and a sentence of news. Categories share emoji on the News page: `preprint` 📄, `accepted` 🎉, `published` 📚, `event` 🤝, `position` 🔬, and `education` 🎓. Wrap phrases in `**double asterisks**` to make them bold, and use `[linked text](https://example.com)` to link part of a sentence. To link a bold title, use `[**Paper title**](https://example.com)`. The homepage automatically shows the four newest entries, and the News page shows the full list in date order.
+
+```json
+{
+  "date": "2026-09",
+  "text": "Our paper **Example** has been accepted!"
+}
+```
+
+Local development reloads after an edit. GitHub Pages needs a new deployment to publish changes.
+
 ### Add a project
 
 Create a new file in `content/projects/your-project-slug.mdx`:
@@ -96,7 +109,7 @@ The publications page sorts entries by year descending automatically.
 
 ## Deployment to GitHub Pages
 
-This repository publishes to `https://shiyt0313.github.io/`. While the site is under development, `.github/workflows/deploy.yml` publishes the standalone page in `maintenance/index.html` whenever `main` is pushed. The Next.js source remains available for local development, and later pushes will continue to show the placeholder until the workflow is changed back.
+This repository publishes the Next.js static export to `https://shiyt0313.github.io/`. Pushing `main` runs `.github/workflows/deploy.yml`, which installs dependencies, builds the site, and deploys `out/` to GitHub Pages.
 
 To publish an update from this checkout:
 
@@ -106,9 +119,7 @@ git commit -m "Update website"
 git push origin main
 ```
 
-Wait for the `Deploy placeholder to Pages` workflow to finish in GitHub Actions.
-
-To publish the full website later, update the workflow to run `npm ci` and `npm run build`, then upload the generated `out/` directory instead of the placeholder.
+Wait for the `Deploy website to Pages` workflow to finish in GitHub Actions.
 
 Notes:
 

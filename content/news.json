@@ -1,0 +1,92 @@
+[
+  {
+    "date": "2026-09",
+    "category": "preprint",
+    "text": "Our preprint [**Rondo: Unsupervised Discovery of Recurring Temporal Structure**](https://arxiv.org/abs/2609.32500), a framework that discovers reusable units and recurring compositions in unlabeled time series, updating its discoveries as new data arrives, is now available on arXiv!"
+  },
+  {
+    "date": "2026-09",
+    "category": "accepted",
+    "text": "Our paper [**TRACE**](https://arxiv.org/abs/2609.32500), on contextual activity recognition through multimodal sensing and temporal reasoning, has been accepted to [**ACM IMWUT**](https://dl.acm.org/journal/imwut)!"
+  },
+  {
+    "date": "2026-09",
+    "category": "accepted",
+    "text": "Our paper [**EduGage**](https://arxiv.org/abs/2605.01238), on multimodal sensing for momentary engagement assessment in self-guided learning, has been accepted to [**ACM IMWUT**](https://dl.acm.org/journal/imwut)!"
+  },
+  {
+    "date": "2026-09",
+    "category": "event",
+    "text": "I attended the [**ACM AI Leadership Summit 2026**](https://aisummit26.acm.org/) in Atlanta."
+  },
+  {
+    "date": "2026-05",
+    "category": "preprint",
+    "text": "We released the preprint of [**TRACE: Temporal Reasoning over Context and Evidence for Activity Recognition in Smart Homes**](https://arxiv.org/abs/2605.02841), a framework that combines ambient and wearable sensing with LLM-based temporal reasoning to understand everyday activities in context."
+  },
+  {
+    "date": "2026-05",
+    "category": "preprint",
+    "text": "We released the preprint of [**EduGage: Methods and Dataset for Sensor-Based Momentary Assessment of Engagement in Self-Guided Video Learning**](https://arxiv.org/abs/2605.01238), an approach that uses physiological and behavioral signals to estimate learners’ momentary engagement during self-guided video learning."
+  },
+  {
+    "date": "2025-10",
+    "category": "published",
+    "text": "Our paper [**Towards More Equitable Ulcer Recognition Models: A Dataset of Naturalistic Foot Images from People of Color Living with Diabetes**](https://doi.org/10.1109/BHI67747.2025.11269467), introducing naturalistic foot images from people of color living with diabetes, was published at [**IEEE BHI 2025**](https://bhi.embs.org/2025/)."
+  },
+  {
+    "date": "2025-10",
+    "category": "preprint",
+    "text": "Our preprint [**LLMartini: Seamless and Interactive Leveraging of Multiple LLMs through Comparison and Composition**](https://arxiv.org/abs/2510.19252), an interactive system for comparing and composing responses from multiple LLMs, is now available on arXiv!"
+  },
+  {
+    "date": "2025-08",
+    "category": "position",
+    "text": "I joined [**AI-CARING**](https://www.ai-caring.org/) at Georgia Tech as a Graduate Research Assistant, working on context-aware AI and multimodal activity understanding."
+  },
+  {
+    "date": "2025-05",
+    "category": "position",
+    "text": "I returned to the [**PI Lab at Tsinghua University**](https://pi.cs.tsinghua.edu.cn/) as a Research Assistant, working on interactive multi-LLM systems."
+  },
+  {
+    "date": "2025-04",
+    "category": "published",
+    "text": "Our papers [**GenieWizard**](https://doi.org/10.1145/3706598.3714327) and [**COMETIC**](https://doi.org/10.1145/3706598.3713936) were published at [**ACM CHI 2025**](https://chi2025.acm.org/)! "
+  },
+  {
+    "date": "2025-01",
+    "category": "accepted",
+    "text": "Two of our papers, [**GenieWizard: Multimodal App Feature Discovery with Large Language Models**](https://doi.org/10.1145/3706598.3714327) and [**Enhancing Smartphone Eye Tracking with Cursor-Based Interactive Implicit Calibration**](https://doi.org/10.1145/3706598.3713936), have been accepted to [**ACM CHI 2025**](https://chi2025.acm.org/)! GenieWizard helps developers discover missing multimodal app features through LLM-simulated user interactions. COMETIC improves smartphone eye tracking through implicit calibration during cursor-based interaction."
+  },
+  {
+    "date": "2024-11",
+    "category": "published",
+    "text": "Our paper [**CalibRead: Unobtrusive Eye Tracking Calibration from Natural Reading Behavior**](https://doi.org/10.1145/3699737) was published in [**ACM IMWUT**](https://dl.acm.org/journal/imwut). CalibRead calibrates eye tracking from natural reading behavior, reducing the need for explicit calibration tasks."
+  },
+  {
+    "date": "2024-09",
+    "category": "accepted",
+    "text": "Our paper **CalibRead**, on eye tracking calibration from natural reading behavior, has been accepted to [**ACM IMWUT**](https://dl.acm.org/journal/imwut)!"
+  },
+  {
+    "date": "2024-08",
+    "category": "preprint",
+    "text": "Our preprint [**CasualGaze: Towards Modeling and Recognizing Casual Gaze Behavior for Efficient Gaze-based Object Selection**](https://arxiv.org/abs/2408.12710), a gaze-based selection technique that models natural, casual glances, is now available on arXiv!"
+  },
+  {
+    "date": "2024-08",
+    "category": "preprint",
+    "text": "Our preprint [**SonarWatch: Field sensing technique for smartwatches based on ultrasound and motion**](https://arxiv.org/abs/2408.12689), a smartwatch sensing technique combining ultrasound and motion sensing, is now available on arXiv!"
+  },
+  {
+    "date": "2024-08",
+    "category": "preprint",
+    "text": "Our preprint [**Bridging the gap between natural user expression with complex automation programming in smart homes**](https://arxiv.org/abs/2408.12687), an LLM-based system for expressing and generating complex smart-home automations, is now available on arXiv!"
+  },
+  {
+    "date": "2024-08",
+    "category": "education",
+    "text": "I started my **Ph.D. in Computer Science at Georgia Tech**, advised by [**Prof. Thomas Plötz**](https://www.ic.gatech.edu/people/thomas-ploetz)!"
+  }
+]

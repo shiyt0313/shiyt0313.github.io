@@ -1,7 +1,7 @@
 import { HomeExperience } from "@/components/HomeExperience";
 import { getProjectList } from "@/lib/mdx";
-import { getSelectedPublications } from "@/lib/publications";
+import { newsItems } from "@/data/news";
 
 export default function HomePage() {
-  return <HomeExperience projects={getProjectList().slice(0, 3)} publications={getSelectedPublications(3)} />;
+  return <HomeExperience projects={getProjectList().slice(0, 4)} news={newsItems} />;
 }

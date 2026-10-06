@@ -1,4 +1,4 @@
-name: Deploy placeholder to Pages
+name: Deploy website to Pages
 
 on:
   push:
@@ -22,15 +22,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static website
+        run: npm run build
+
+      - name: Prepare Pages artifact
+        run: touch out/.nojekyll
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
-
-      - name: Prepare placeholder
-        run: |
-          mkdir -p out
-          cp maintenance/index.html out/index.html
-          cp maintenance/index.html out/404.html
-          touch out/.nojekyll
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

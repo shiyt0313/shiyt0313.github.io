@@ -5,16 +5,18 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { getAssetPath } from "@/lib/assets";
 import { siteConfig } from "@/lib/site";
+import { useTheme } from "@/components/ThemeProvider";
 
 const navItems = [
   { href: "/", label: "Home" },
+  { href: "/blog", label: "News" },
   { href: "/projects", label: "Projects" },
-  { href: "/publications", label: "Publications" },
-  { href: "/blog", label: "News" }
+  { href: "/publications", label: "Publications" }
 ];
 
 export function Navbar() {
   const pathname = usePathname();
+  const { mode, controlsMode, changeMode } = useTheme();
 
   return (
     <header className="site-header">
@@ -40,7 +42,16 @@ export function Navbar() {
             })}
             <a href={getAssetPath(siteConfig.cv)} download className="nav-cv" aria-label="Download CV as PDF">CV ↓</a>
           </nav>
-          {pathname === "/" ? <div id="site-side-switch" className="site-side-switch" /> : null}
+          <div id="site-side-switch" className="site-side-switch">
+            <div className="record-controls" role="group" aria-label="Display mode">
+              <button className={`record-tab ${controlsMode === "day" ? "record-tab-active" : ""}`} onClick={(event) => changeMode(event, "day")} type="button" aria-pressed={mode === "day"}>
+                <span className="record-tab-dot" aria-hidden="true">☀</span> Day
+              </button>
+              <button className={`record-tab ${controlsMode === "night" ? "record-tab-active" : ""}`} onClick={(event) => changeMode(event, "night")} type="button" aria-pressed={mode === "night"}>
+                <span className="record-tab-dot" aria-hidden="true">☾</span> Night
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </header>
