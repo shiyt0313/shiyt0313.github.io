@@ -17,6 +17,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [controlsMode, setControlsMode] = useState<ThemeMode>("day");
   const [backgroundReveal, setBackgroundReveal] = useState<{ key: number; finished: boolean } | null>(null);
   const textModeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const revealTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     let savedMode: string | null = null;
@@ -32,11 +33,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setControlsMode(initialMode);
     return () => {
       if (textModeTimer.current) clearTimeout(textModeTimer.current);
+      if (revealTimer.current) clearTimeout(revealTimer.current);
     };
   }, []);
 
   function changeMode(event: MouseEvent<HTMLButtonElement>, next: ThemeMode) {
-    if (next === mode || (backgroundReveal && !backgroundReveal.finished)) return;
+    if (next === mode) return;
+    if (backgroundReveal && !backgroundReveal.finished) {
+      if (revealTimer.current) return;
+      finishBackgroundReveal();
+    }
 
     const body = document.body;
     try {
@@ -46,6 +52,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      if (revealTimer.current) clearTimeout(revealTimer.current);
       body.dataset.siteMode = next;
       body.dataset.textMode = next;
       setBackgroundReveal(null);
@@ -77,10 +84,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       textModeTimer.current = null;
     }, 420);
     setBackgroundReveal({ key: Date.now(), finished: false });
+    if (revealTimer.current) clearTimeout(revealTimer.current);
+    revealTimer.current = setTimeout(finishBackgroundReveal, 1700);
     setMode(next);
   }
 
   function finishBackgroundReveal() {
+    if (revealTimer.current) {
+      clearTimeout(revealTimer.current);
+      revealTimer.current = null;
+    }
     const body = document.body;
     body.style.transition = "none";
     body.style.backgroundColor = "var(--project-page-background)";

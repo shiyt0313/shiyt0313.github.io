@@ -10,16 +10,15 @@ export default function ProjectsPage() {
 
   return (
     <div className="space-y-8">
-      <section className="rounded-[2rem] border border-white/80 bg-white/90 p-8 shadow-panel">
-        <p className="eyebrow">Projects</p>
-        <h1 className="mt-4 font-serif text-4xl text-ink">Research through working systems.</h1>
-        <p className="mt-6 max-w-3xl leading-8 text-slate">
-          From wearable sensing and gaze interaction to smart-home intelligence and AI-assisted programming, these projects explore how computation can fit naturally into daily life.
+      <section className="projects-page-intro px-8 py-4">
+        <h1 className="text-ink">From human dynamics to adaptive AI.</h1>
+        <p className="mt-6 max-w-5xl text-slate">
+          From wearables and smart homes to gaze interaction and learning, these projects use multimodal sensing and time-series learning to understand human behavior in context. They also explore how AI agents and interactive systems can turn that understanding into adaptive support that evolves with people.
         </p>
       </section>
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="flex flex-col gap-5">
         {projects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+          <ProjectCard key={project.slug} project={project} variant="feature" />
         ))}
       </div>
     </div>

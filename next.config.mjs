@@ -29,6 +29,7 @@ const githubPages = getGitHubPagesConfig();
 const nextConfig = {
   assetPrefix: githubPages.assetPrefix,
   basePath: githubPages.basePath,
+  distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
   env: {
     NEXT_PUBLIC_BASE_PATH: githubPages.basePath
   },

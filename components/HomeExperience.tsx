@@ -55,8 +55,23 @@ export function HomeExperience({ projects, news }: { projects: ProjectFrontmatte
         </div>
       </section>
 
-      <NewsTimeline items={news} limit={4} />
+      <NewsTimeline items={news} limit={5} />
       <SideDeck projects={projects} />
+      <section className="home-contact" aria-labelledby="home-contact-title">
+        <h2 id="home-contact-title" className="section-title">Let&apos;s connect.</h2>
+        <p>
+          If you&apos;re also interested in Human–AI Co-evolution, ubiquitous computing, or multimodal sensing,
+          I&apos;d love to exchange ideas and explore collaborations. Feel free to get in touch.
+        </p>
+        <Link className="home-contact-link" href={`mailto:${siteConfig.email}`}>
+          Contact me
+          <span className="home-contact-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 19 19 5M8 5h11v11" />
+            </svg>
+          </span>
+        </Link>
+      </section>
     </div>
   );
 }

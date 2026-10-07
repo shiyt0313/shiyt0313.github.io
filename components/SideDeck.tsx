@@ -76,7 +76,7 @@ export function SideDeck({ projects }: { projects: ProjectFrontmatter[] }) {
   return (
     <section className="side-deck" id="work" ref={sectionRef}>
       <div className="side-deck-heading">
-        <h2 className="section-title">Selected Projects</h2>
+        <h2 className="section-title">Latest Projects</h2>
         <Link href="/projects" className="side-deck-all section-link">View all projects <span aria-hidden="true">→</span></Link>
       </div>
       <div className="selected-project-grid">

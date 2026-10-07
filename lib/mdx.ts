@@ -11,11 +11,15 @@ type BaseFrontmatter = {
   title: string;
   slug: string;
   date: string;
+  sortOrder?: number;
   tags?: string[];
 };
 
 export type ProjectFrontmatter = BaseFrontmatter & {
   status: string;
+  showVenueBadge?: boolean;
+  badgeTone?: "orange";
+  award?: string;
   description: string;
   image?: string;
   links?: {
@@ -52,7 +56,11 @@ function getSlugs(kind: ContentKind) {
 }
 
 function sortByDate<T extends BaseFrontmatter>(items: T[]) {
-  return [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return [...items].sort((a, b) =>
+    new Date(b.date).getTime() - new Date(a.date).getTime() ||
+    (a.sortOrder ?? 0) - (b.sortOrder ?? 0) ||
+    a.slug.localeCompare(b.slug)
+  );
 }
 
 function normalizeFrontmatterAssets<T extends BaseFrontmatter>(frontmatter: T) {
