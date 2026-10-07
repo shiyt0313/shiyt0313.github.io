@@ -115,6 +115,8 @@ export function SensorSignalField() {
     const mobile = window.matchMedia("(max-width: 767px)");
     const noiseSeed = Math.random() * 10000;
     const walker = zone.querySelector<SVGSVGElement>(".intro-walker");
+    const portrait = zone.querySelector<HTMLElement>(".intro-portrait-column");
+    const portraitLink = zone.querySelector<HTMLElement>(".intro-portrait-link");
     const head = walker?.querySelector<SVGCircleElement>(".intro-walker-head");
     const shadow = walker?.querySelector<SVGEllipseElement>(".intro-walker-shadow");
     const parts = Object.fromEntries(["torso", "front-leg", "back-leg", "front-arm", "back-arm"].map(part => [part, walker?.querySelector<SVGPathElement>(`[data-walker-part="${part}"]`)]));
@@ -182,7 +184,8 @@ export function SensorSignalField() {
       }
       if (movement.action === "wave-right") {
         const amplitude = [5, 8, 32];
-        return ordinary * (1 - envelope * .4) + Math.sin(progress * TAU * 3) * envelope * amplitude[lane];
+        const wave = Math.sin(progress * TAU * 3) * envelope;
+        return wave * amplitude[lane];
       }
       const spike = Math.exp(-Math.pow((progress - .5) / .065, 2));
       return ordinary * (1 - envelope * .7) + spike * [56, 40, 52][lane];
@@ -340,6 +343,7 @@ export function SensorSignalField() {
       if (mobile.matches) {
         activeAction = null;
         delete zone.dataset.walkerAction;
+        zone.style.removeProperty("--portrait-signal-offset");
         schedule();
         return;
       }
@@ -348,6 +352,10 @@ export function SensorSignalField() {
       const resized = width !== bounds.width;
       width = bounds.width;
       height = bounds.height;
+      if (portrait && portraitLink) {
+        const offset = laneY(1) - portrait.offsetTop - portraitLink.offsetTop - portraitLink.clientHeight / 2;
+        zone.style.setProperty("--portrait-signal-offset", `${offset}px`);
+      }
       if (resized || !history[0].length) {
         const cells = Math.ceil(width / SAMPLE_SPACING) + 1;
         history = CHANNELS.map((_, lane) => Float32Array.from({ length: cells }, (_, cell) => walkingSignal(lane, cell * SAMPLE_SPACING * 9)));
@@ -403,6 +411,7 @@ export function SensorSignalField() {
       themeObserver.disconnect();
       zone.style.removeProperty("--walker-x");
       zone.style.removeProperty("--signal-center-x");
+      zone.style.removeProperty("--portrait-signal-offset");
       delete zone.dataset.walkerAction;
       zone.removeEventListener("click", triggerMovement);
       canvas.removeEventListener("keydown", onKeyDown);

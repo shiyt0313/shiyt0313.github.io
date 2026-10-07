@@ -190,6 +190,9 @@ body[data-text-mode="night"] .intro-walker { color: rgba(129,226,234,.8); }
 .intro-walker-far-limb { opacity: .5; }
 .intro-walker-shadow { fill: currentColor; stroke: none; }
 .intro-portrait-column,.home-titlebar,.intro-band { position: relative; z-index: 1; }
+@media (min-width: 768px) {
+  .intro-portrait-column { translate: 0 var(--portrait-signal-offset, 0px); }
+}
 .home-titlebar { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
 .home-titlebar .eyebrow { font-size: 13px; }
 .home-wordmark { max-width: 760px; font-family: var(--font-geist-sans),Arial,sans-serif; font-size: clamp(28px,3.8vw,42px); font-weight: 650; letter-spacing: -.05em; line-height: 1.15; }
