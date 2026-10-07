@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { BlogFrontmatter } from "@/lib/mdx";
 import { Tag } from "@/components/Tag";
 
@@ -12,11 +11,6 @@ export function BlogCard({ post }: { post: BlogFrontmatter }) {
         {post.tags?.map((tag) => (
           <Tag key={tag}>{tag}</Tag>
         ))}
-      </div>
-      <div className="mt-6">
-        <Link className="font-medium text-accent underline-offset-4 hover:underline" href={`/blog/${post.slug}`}>
-          Read note
-        </Link>
       </div>
     </article>
   );

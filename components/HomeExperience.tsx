@@ -26,7 +26,7 @@ export function HomeExperience({ projects, news }: { projects: ProjectFrontmatte
       <section className="intro-zone" id="about">
         <div className="intro-portrait-column">
           <div className="intro-portrait-wrap">
-            <Link href="/contact" className="intro-portrait-link" aria-label="Contact Yingtian Shi">
+            <a href={`mailto:${siteConfig.email}`} className="intro-portrait-link" aria-label="Contact Yingtian Shi">
               <span className="portrait-orbit portrait-orbit-mid" aria-hidden="true" />
               <span className="portrait-orbit portrait-orbit-far" aria-hidden="true" />
               <span className={`intro-photo-flip ${mode === "night" ? "intro-photo-flip-night" : ""}`}>
@@ -34,7 +34,7 @@ export function HomeExperience({ projects, news }: { projects: ProjectFrontmatte
                 <span className="intro-photo-face intro-photo-back"><Image src={getAssetPath("/images/profile2.JPG")} alt="Yingtian Shi" width={320} height={320} priority className="intro-portrait" /></span>
               </span>
               <span className="portrait-link-cue" aria-hidden="true">Contact me ↗</span>
-            </Link>
+            </a>
           </div>
         </div>
         <div className="home-titlebar">

@@ -1,13 +1,13 @@
 # Academic Portfolio
 
-Next.js academic website starter for a personal research homepage, portfolio, publications list, project archive, and blog / notes section.
+Next.js academic website with Home, News, Projects, and Publications pages.
 
 ## Stack
 
 - Next.js App Router
 - TypeScript
 - Tailwind CSS
-- MDX for projects and blog content
+- MDX frontmatter for project cards
 - Local TypeScript metadata for publications
 - Static export for GitHub Pages or Vercel
 
@@ -24,7 +24,7 @@ Open `http://localhost:3000`.
 
 ### Update News
 
-Edit [`content/news.json`](content/news.json). Each entry has a month (`YYYY-MM`), a `category`, and a sentence of news. Categories share emoji on the News page: `preprint` 📄, `accepted` 🎉, `published` 📚, `event` 🤝, `position` 🔬, and `education` 🎓. Wrap phrases in `**double asterisks**` to make them bold, and use `[linked text](https://example.com)` to link part of a sentence. To link a bold title, use `[**Paper title**](https://example.com)`. The homepage automatically shows the four newest entries, and the News page shows the full list in date order.
+Edit [`content/news.json`](content/news.json). Each entry has a month (`YYYY-MM`), a `category`, and a sentence of news. Categories share emoji on the News page: `preprint` 📄, `accepted` 🎉, `published` 📚, `event` 🤝, `position` 🔬, and `education` 🎓. Wrap phrases in `**double asterisks**` to make them bold, and use `[linked text](https://example.com)` to link part of a sentence. To link a bold title, use `[**Paper title**](https://example.com)`. The homepage automatically shows the five newest entries, and the News page shows the full list in date order.
 
 ```json
 {
@@ -55,24 +55,7 @@ links:
 ---
 ```
 
-The file automatically appears on `/projects` and gets a detail page at `/projects/project-slug`.
-
-### Add a blog post or research note
-
-Create a file in `content/blog/your-post-slug.mdx`:
-
-```mdx
----
-title: "Post Title"
-slug: "post-slug"
-date: "2026-06-12"
-tags:
-  - Notes
-summary: "Short summary"
----
-```
-
-The file automatically appears on `/blog` and gets a detail page at `/blog/post-slug`.
+The file automatically appears as a card on `/projects`. The homepage shows the four newest projects. Project detail pages are not generated.
 
 ### Add or edit publications
 
@@ -84,9 +67,7 @@ Edit [`data/publications.ts`](data/publications.ts) and add a new object with:
 - `year`
 - `paper`
 - `code`
-- `project`
-- `bibtex`
-- `selected`
+- `authorNote` (optional)
 
 The publications page sorts entries by year descending automatically.
 
