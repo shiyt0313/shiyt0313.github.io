@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SideDeck } from "@/components/SideDeck";
+import { SensorSignalField } from "@/components/SensorSignalField";
 import { NewsTimeline } from "@/components/NewsTimeline";
 import type { NewsItem } from "@/data/news";
 import { ProjectFrontmatter } from "@/lib/mdx";
@@ -24,6 +25,19 @@ export function HomeExperience({ projects, news }: { projects: ProjectFrontmatte
   return (
     <div className="home-stack" data-mode={mode}>
       <section className="intro-zone" id="about">
+        <SensorSignalField />
+        <span className="intro-signal-hint" aria-hidden="true">Click anywhere to make a move →</span>
+        <span className="intro-walker-track" aria-hidden="true">
+          <svg className="intro-walker" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <ellipse className="intro-walker-shadow" cx="32" cy="63" rx="12" ry="1" opacity=".15" />
+            <path data-walker-part="back-leg" className="intro-walker-far-limb" d="M32 35 35 49 40 61h5" />
+            <path data-walker-part="back-arm" className="intro-walker-far-limb" d="M33 21 40 29 38 39" />
+            <path data-walker-part="torso" d="M33 16 33 21 32 35" />
+            <path data-walker-part="front-leg" d="M32 35 28 48 23 61h5" />
+            <path data-walker-part="front-arm" d="M33 21 27 29 29 39" />
+            <circle className="intro-walker-head" cx="33" cy="10" r="5" />
+          </svg>
+        </span>
         <div className="intro-portrait-column">
           <div className="intro-portrait-wrap">
             <a href={`mailto:${siteConfig.email}`} className="intro-portrait-link" aria-label="Contact Yingtian Shi">
