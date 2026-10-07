@@ -29,7 +29,6 @@
     }
   },
   "include": [
-    "**/*.mdx",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",

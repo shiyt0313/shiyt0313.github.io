@@ -55,7 +55,7 @@ links:
 ---
 ```
 
-The file automatically appears as a card on `/projects`. The homepage shows the four newest projects. Project detail pages are not generated.
+The file automatically appears as a card on `/projects`. The homepage shows the four newest projects. Only the frontmatter is displayed; the body remains in the source as project notes. Project detail pages are not generated.
 
 ### Add or edit publications
 

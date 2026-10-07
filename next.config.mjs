@@ -1,9 +1,4 @@
-import createMDX from "@next/mdx";
 import path from "node:path";
-
-const withMDX = createMDX({
-  extension: /\.mdx?$/
-});
 
 function getGitHubPagesConfig() {
   const repository = process.env.GITHUB_REPOSITORY?.split("/")[1];
@@ -34,7 +29,6 @@ const nextConfig = {
     NEXT_PUBLIC_BASE_PATH: githubPages.basePath
   },
   output: "export",
-  pageExtensions: ["ts", "tsx", "md", "mdx"],
   outputFileTracingRoot: path.join(process.cwd()),
   trailingSlash: true,
   images: {
@@ -43,4 +37,4 @@ const nextConfig = {
   }
 };
 
-export default withMDX(nextConfig);
+export default nextConfig;
