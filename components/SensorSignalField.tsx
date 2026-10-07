@@ -98,7 +98,7 @@ function limbPath(root: Point, end: Point, length: number, bend: number, foot = 
 const WALK_SPEED = .027;
 const RUN_SPEED = .114;
 const SAMPLE_SPACING = 1;
-const ACTIVE_TRAIL_LENGTH = 190;
+const ACTIVE_TRAIL_LENGTH = 95;
 
 export function SensorSignalField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -132,11 +132,12 @@ export function SensorSignalField() {
     let gaitPhase = 0;
     let positioned = false;
     let history = CHANNELS.map(() => new Float32Array(0));
+    let interactionSamples = new Uint8Array(0);
 
     function laneY(lane: number) {
       const center = height * .52;
       const spacing = Math.min(88, height * .20);
-      return center + (lane - 1) * spacing;
+      return center + (lane - 1) * spacing - (lane === 1 ? 20 : 0);
     }
 
     function signalNoise(lane: number, time: number, interval: number, salt: number) {
@@ -230,6 +231,8 @@ export function SensorSignalField() {
       for (let cell = first; cell <= last; cell++) {
         const sampleTime = endTime - Math.max(0, end - cell * SAMPLE_SPACING) / speed;
         for (let lane = 0; lane < CHANNELS.length; lane++) history[lane][cell] = sensorValue(lane, sampleTime, movement);
+        interactionSamples[cell] = movement && sampleTime >= movement.startedAt
+          && sampleTime <= movement.startedAt + movement.duration ? 1 : 0;
       }
     }
 
@@ -307,20 +310,26 @@ export function SensorSignalField() {
         const end = Math.min(signalEnd, signalCenter);
         const gradient = context.createLinearGradient(signalCenter - ACTIVE_TRAIL_LENGTH, 0, signalCenter, 0);
         gradient.addColorStop(0, "transparent");
-        gradient.addColorStop(.4, active);
         gradient.addColorStop(1, active);
         context.beginPath();
         context.strokeStyle = gradient;
         context.lineWidth = 2;
         context.shadowColor = active;
         context.shadowBlur = 5;
+        let inInteraction = false;
         for (let x = start; x <= end; x += SAMPLE_SPACING) {
+          const cell = Math.min(interactionSamples.length - 1, Math.floor(x / SAMPLE_SPACING));
+          if (!interactionSamples[cell]) {
+            inInteraction = false;
+            continue;
+          }
           const value = historyValue(lane, x);
           const pointY = y - value;
-          if (x === start) context.moveTo(x, pointY);
+          if (!inInteraction) context.moveTo(x, pointY);
           else context.lineTo(x, pointY);
+          inInteraction = true;
         }
-        context.lineTo(end, y - historyValue(lane, end));
+        if (inInteraction) context.lineTo(end, y - historyValue(lane, end));
         context.stroke();
         context.shadowBlur = 0;
       }
@@ -354,6 +363,7 @@ export function SensorSignalField() {
       if (resized || !history[0].length) {
         const cells = Math.ceil(width / SAMPLE_SPACING) + 1;
         history = CHANNELS.map((_, lane) => Float32Array.from({ length: cells }, (_, cell) => walkingSignal(lane, cell * SAMPLE_SPACING * 9)));
+        interactionSamples = new Uint8Array(cells);
       }
       if (!positioned) {
         walkerX = Math.max(SIGNAL_START + 12, -canvas.offsetLeft + 32);
