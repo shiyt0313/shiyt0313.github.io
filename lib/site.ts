@@ -18,9 +18,9 @@ function getSiteUrl() {
 
 export const siteConfig = {
   name: "Yingtian Shi",
-  title: "Yingtian Shi | Research Portfolio",
+  title: "Yingtian Shi | PhD Student at Georgia Tech",
   description:
-    "Academic website for Yingtian Shi, PhD student at Georgia Tech, featuring research projects, publications, notes, CV, and contact information.",
+    "Yingtian Shi is a Computer Science PhD student at Georgia Tech researching Human–AI Co-evolution, ubiquitous computing, and multimodal sensing.",
   url: getSiteUrl(),
   affiliation: "PhD Student, Computer Science, Georgia Tech",
   advisor: "Prof. Thomas Plötz",
